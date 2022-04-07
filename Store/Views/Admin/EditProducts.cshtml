@@ -1,0 +1,61 @@
+﻿@model IQueryable<Store.Models.Entities.Product>
+
+<div class="container p-3">
+    <div class="row pt-4">
+        <div class="col-6">
+            <h2 class="text-primary">Товары</h2>
+        </div>
+        <div class="col-6 text-right">
+            <a asp-controller="Admin" asp-action="CreateProduct" class="btn btn-success">Добавить товар</a> 
+        </div>
+    </div>
+    <br />
+
+    @if (Model.Count()>0)
+    {
+        <table class="table table-bordered table-striped table-hover" style="width:100%; height:auto">
+            <thead class="thead-dark">
+                <tr>
+                    <th>
+                    Наименование
+                    </th>
+                    <th>
+                    Краткое описание
+                    </th>
+                    <th>
+                    Полное описание
+                    </th>
+                    <th>
+                    Цена
+                    </th>
+                    <th>
+                    Редактировать
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var product in Model)
+	            {
+                <tr>
+                    <td width="15%">@product.Title</td>
+                    <td width="25%">@product.Subtitle</td>
+                    <td width="35%">@product.Text</td>
+                    <td width="15%">@product.Price</td>
+                    <td width="20%">
+                        <div class="w-100 btn-group"role="group">
+                            <a asp-controller="Admin" asp-action="UpdateProduct" asp-route-Id="@product.Id" class="btn btn-primary mx-1">Изменить</a>
+                            <a asp-controller="Admin" asp-action="DeleteProduct" asp-route-Id="@product.Id" class="btn btn-danger mx-1">Удалить</a>
+                        </div>
+                    </td>
+                </tr>
+	            }
+            </tbody>
+        </table>
+    }
+    else
+    {
+        <p>Список товаров пуст</p>
+    }
+</div>
+
+

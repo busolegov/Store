@@ -2,18 +2,22 @@
 
 <div>
     <div>
-        <h2>Вход</h2>
+        <h2>Вход в личный кабинет</h2>
     </div>
     <div>
         <form method="post">
-            <p>Login</p>
+            <label>Login</label>
             <input asp-for="Login"/>
             <span asp-validation-for="Login"></span>
-            <p>Password</p>
+            <br/>
+            <label>Password</label>
             <input asp-for="Password"/>
             <span asp-validation-for="Password"></span>
             <p></p>
             <button type="submit">Login</button>
         </form>
+    </div>
+    <div>
+        <a class="nav-link text-dark" asp-controller="Account" asp-action="Register">Зарегистрироваться</a>
     </div>
 </div>

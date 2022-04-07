@@ -1,0 +1,56 @@
+﻿@model Product
+
+<form method="post" asp-action="PostDeleteProduct">
+    <input asp-for="Id" hidden />
+    <div class="container p-3">
+        <div class="row pt-4">
+            <div class="col-6">
+                <h2 class="text-primary">Удалить товар</h2>
+            </div>
+        </div>
+        <br />
+
+        <table class="table table-bordered table-striped table-hover" style="width:100%; height:auto">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>
+                        Наименование
+                        </th>
+                        <th>
+                        Краткое описание
+                        </th>
+                        <th>
+                        Полное описание
+                        </th>
+                        <th>
+                        Цена
+                        </th>
+                        <th>
+                        Редактировать
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td width="15%">@Model.Title</td>
+                        <td width="25%">@Model.Subtitle</td>
+                        <td width="35%">@Model.Text</td>
+                        <td width="15%">@Model.Price</td>
+                        <td width="20%">
+                        
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="form-group row">
+                        <div class="col-8 row">
+                            <div class="col">
+                                <input type="submit" class="btn btn-danger w-75" value="Удалить" />
+                            </div>
+                            <div class="col">
+                                <a asp-action="EditProducts" class="btn btn-success w-75 mx-3">Назад</a>
+                            </div>
+                        </div>
+                    </div>
+    </div>
+</form>

@@ -1,7 +1,7 @@
 ﻿using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Identity;
 
-namespace Store.Models
+namespace Store.Models.ViewModels
 {
     public class RegisterViewModel : IdentityUser
     {
@@ -19,11 +19,17 @@ namespace Store.Models
         public string Password { get; set; }
 
         [Required]
-        [Compare("Password", ErrorMessage = "Пароли должны совпадать.")]
+        [Compare("Password", ErrorMessage = "Пароли должны совпадать!")]
         [DataType(DataType.Password)]
-        [Display(Name = "Подтвердить пароль")]
+        [Display(Name = "Подтвердите пароль")]
         public string PasswordConfirm { get; set; }
 
+        [DataType(DataType.PhoneNumber)]
+        [Display(Name = "Номер телефона")]
+        public string Phone { get; set; }
 
+        [DataType(DataType.Date)]
+        [Display(Name = "Дата рождения")]
+        public DateOnly BirthDay { get; set; }
     }
 }

@@ -18,13 +18,6 @@ namespace Store.DataService
         {
             base.OnModelCreating(modelBuilder);
 
-            modelBuilder.Entity<IdentityRole>().HasData(new IdentityRole
-            {
-                Id = "557efe88-e537-41f6-b724-89719aa4bb5e",
-                Name = "admin",
-                NormalizedName = "ADMIN"
-            });
-
             modelBuilder.Entity<IdentityUser>().HasData(new IdentityUser
             {
                 Id = "0f68adf8-8b36-4c07-8b41-3774401e7eb3",
@@ -35,12 +28,6 @@ namespace Store.DataService
                 EmailConfirmed = true,
                 PasswordHash = new PasswordHasher<IdentityUser>().HashPassword(null, "admin"),
                 SecurityStamp = string.Empty
-            });
-
-            modelBuilder.Entity<IdentityUserRole<string>>().HasData(new IdentityUserRole<string>
-            {
-                RoleId = "557efe88-e537-41f6-b724-89719aa4bb5e",
-                UserId = "0f68adf8-8b36-4c07-8b41-3774401e7eb3"
             });
 
             modelBuilder.Entity<Product>().HasData(new Product

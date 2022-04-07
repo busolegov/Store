@@ -1,7 +1,9 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using System.Security.Claims;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Store.DataService;
 using Store.Models;
+using Store.Models.ViewModels;
 
 namespace Store.Controllers
 {
@@ -35,6 +37,7 @@ namespace Store.Controllers
 
             if (result.Succeeded)
             {
+                await _userManager.AddClaimAsync(user, new Claim(ClaimTypes.Role, "User"));
                 await _signInManager.SignInAsync(user, false);
                 return RedirectToAction("Index", "Home");
             }
@@ -49,6 +52,7 @@ namespace Store.Controllers
             return View();
         }
 
+
         [HttpPost]
         public async Task<IActionResult> LoginAsync(LoginViewModel model)
         {
@@ -57,15 +61,42 @@ namespace Store.Controllers
                 return View();
             }
 
+            var user = await _userManager.FindByNameAsync(model.Login);
+
+            if (user == null)
+            {
+                ModelState.AddModelError("", "User not found");
+                return View();
+            }
+
             var result = await _signInManager.PasswordSignInAsync(model.Login, model.Password, model.RememberMe, false);
+
             if (result.Succeeded)
             {
-                return RedirectToAction("Index", "Home");
+                if (model.Login == "admin")
+                {
+                    await _userManager.AddClaimAsync(user, new Claim(ClaimTypes.Role, "Admin"));
+                    return RedirectToAction("Index", "Admin");
+                }
+
+                await _userManager.AddClaimAsync(user, new Claim(ClaimTypes.Role, "User"));
+                return RedirectToAction("Index", "Catalog");
             }
             else
             {
                 return View();
             }
+        }
+
+        public IActionResult Profile() 
+        {
+            return View();
+        }
+
+        public async Task<IActionResult> LogoutAsync() 
+        {
+            await _signInManager.SignOutAsync();
+            return RedirectToAction("Index", "Home");
         }
     }
 }

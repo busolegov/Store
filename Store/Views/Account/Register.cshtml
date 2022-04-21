@@ -1,33 +1,43 @@
 ﻿@model RegisterViewModel
 
-<div>
-    <div>
-        <h2>Регистрация</h2>
-    </div>
-    <div>
-        <form method="post">
-            <p>Login</p>
-            <input asp-for="Login"/>
-            <span asp-validation-for="Login"></span>
-            <p>Password</p>
-            <input asp-for="Password"/>
-            <span asp-validation-for="Password"></span>
-            <p>Confirm Password</p>
-            <input asp-for="PasswordConfirm"/>
-            <span asp-validation-for="PasswordConfirm"></span>
-            <p>Email</p>
-            <input asp-for="Email"/>
-            <span asp-validation-for="Email"></span>
-            <p>Phone number</p>
-            <input asp-for="PhoneNumber"/>
-            <span asp-validation-for="PhoneNumber"></span>
-            <p>Birthday</p>
-            <input asp-for="BirthDay"/>
-            <span asp-validation-for="BirthDay"></span>
-            <p></p>
-            <button type="submit">Register</button>
-        </form>
-    </div>
-</div>
+
+<h4>Регистрация</h4>
+
+<form method="post">
+  <div class="col-3">
+    <label class="form-label">Логин</label>
+    <input type="text" asp-for="Login" class="form-control" />
+    <span asp-validation-for="Login"></span>
+  </div>
+
+    <div class="col-3">
+    <label class="form-label">Почта</label>
+    <input type="text" asp-for="Email" class="form-control" />
+    <span asp-validation-for="Email"></span>
+  </div>
+
+  <div class="col-3">
+    <label class="form-label">Пароль</label>
+    <input type="password" asp-for="Password" class="form-control"/>
+    <span asp-validation-for="Password"></span>
+  </div>
+
+  <div class="col-3">
+    <label class="form-label">Подтвердить пароль</label>
+    <input type="password" asp-for="PasswordConfirm" class="form-control"/>
+    <span asp-validation-for="PasswordConfirm"></span>
+  </div>
+
+    <div class="col-3">
+    <label class="form-label">Телефон</label>
+    <input type="tel" asp-for="Phone" class="form-control"/>
+  </div>
+
+      <div class="col-3">
+    <label class="form-label">Дата рождения</label>
+    <input type="date" asp-for="BirthDay" class="form-control"/>
+  </div>
+  <button type="submit" class="btn btn-primary btn-block mx-auto my-2">Зарегистрироваться</button>
+</form>
 
 

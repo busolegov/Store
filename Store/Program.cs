@@ -3,12 +3,14 @@ using System.Security.Claims;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Store.DataService;
+using Store.Models.Entities;
 
 var builder = WebApplication.CreateBuilder(args);
 
-
+builder.Services.AddSession();
 builder.Services.AddTransient<IProductService, ProductRepositoryService>();
-builder.Services.AddTransient<DataService>();
+builder.Services.AddTransient<IShoppingCartService, ShoppingCart>();
+builder.Services.AddTransient<DataManager>();
 
 builder.Services.AddControllersWithViews();
 
@@ -58,6 +60,8 @@ app.UseRouting();
 
 app.UseAuthentication();
 app.UseAuthorization();
+
+app.UseSession();
 
 app.MapControllerRoute(
     name: "default",

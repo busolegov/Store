@@ -6,25 +6,25 @@ namespace Store.Controllers
 {
     public class CatalogController : Controller
     {
-        private ApplicationDbContext _context;
+        private DataManager _dataManager;
 
-        public CatalogController(ApplicationDbContext context)
+        public CatalogController(DataManager dataManager)
         {
-            _context = context;
+            _dataManager = dataManager;
         }
 
         public IActionResult Index()
         {
-            
-            var productService = new ProductRepositoryService(_context);
-            
-            return View(productService.GetProducts());
+            return View(_dataManager.ProductService.GetProducts());
         }
 
-        [HttpPost]
-        public IActionResult Index(Guid id)
-        {
-            return View();
-        }
+
+        //[HttpPost]
+        //public async Task<IActionResult> IndexAsync(Guid id)
+        //{
+        //    var product = await _dataManager.ProductService.GetProductByIdAsync(id);
+        //    _dataManager.ShoppingCartService.AddItem(product, 1);
+        //    return View();
+        //}
     }
 }

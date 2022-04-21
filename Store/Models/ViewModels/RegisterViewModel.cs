@@ -5,20 +5,20 @@ namespace Store.Models.ViewModels
 {
     public class RegisterViewModel : IdentityUser
     {
-        [Required]
+        [Required(ErrorMessage ="Необходимо ввести логин!")]
         [Display(Name = "Логин")]
         public string Login { get; set; }
 
-        [Required]
+        [Required(ErrorMessage ="Неоходимо ввести почту!")]
         [Display(Name = "Email")]
         public string Email { get; set; }
 
-        [Required]
+        [Required(ErrorMessage ="Необходимо ввести пароль!")]
         [DataType(DataType.Password)]
         [Display(Name = "Пароль")]
         public string Password { get; set; }
 
-        [Required]
+        [Required(ErrorMessage ="Пароли должны совпадать!")]
         [Compare("Password", ErrorMessage = "Пароли должны совпадать!")]
         [DataType(DataType.Password)]
         [Display(Name = "Подтвердите пароль")]

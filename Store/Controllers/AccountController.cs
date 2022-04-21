@@ -88,9 +88,11 @@ namespace Store.Controllers
             }
         }
 
-        public IActionResult Profile() 
+        public async Task<IActionResult> ProfileAsync() 
         {
-            return View();
+            var name = User.Identity.Name;
+            var user = await _userManager.FindByNameAsync(name);
+            return View(user);
         }
 
         public async Task<IActionResult> LogoutAsync() 

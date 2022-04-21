@@ -1,2 +1,14 @@
-﻿
+﻿@model IdentityUser
+
+<h1>Личный кабинет</h1>
+<div class="container">
+    <form>
+        <label>Имя</label>
+        <p>@Model.UserName</p>
+        <label>Email</label>
+        <p>@Model.Email</p>
+        <label>Телефон</label>
+        <p>@Model.PhoneNumber</p>
+    </form>
+</div>
 <a asp-controller="Account" asp-action="Logout">Log Out</a>

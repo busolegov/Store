@@ -11,5 +11,4 @@ namespace Store.Components
             return View("User", user);
         }
     }
-
 }

@@ -11,11 +11,11 @@
 <body>
     <header>
                     <!-- Navbar -->
-        <nav class="navbar navbar-expand-sm navbar-brand bg-light">
+        <nav class="navbar navbar-expand navbar-brand bg-light">
           <!-- Container wrapper -->
-          <div class="container">
+          <div class="container-fluid">
             <!-- Collapsible wrapper -->
-            <div class="collapse navbar-collapse" id="navbarButtonsExample">
+            <div class="collapse navbar-collapse">
               <!-- Left links -->
               <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                 <li class="nav-item">
@@ -25,25 +25,24 @@
                   <a class="navbar-brand" asp-area="" asp-controller="Catalog" asp-action="Index">Каталог товаров</a>
                 </li>
               </ul>
-              <!-- Left links -->
-
-              <div class="d-flex align-items-center">
-                  <div>
-                        @if(!User.Identity.IsAuthenticated)
-                        {
-                            <a class="btn-primary" asp-area="" asp-controller="Account" asp-action="Login" role="button">Вход в личный кабинет</a>
-                        }
-                  </div>
-                  <div>
-                        @if (User.Identity.IsAuthenticated)
-                        {
-                            <label>Вы зашли как </label>
-                        }
-                        @await Component.InvokeAsync("User")
-                  </div>
-                <div>
-                </div>
-              </div>
+            </div>
+            <div class="navbar-nav me-auto mb-2 mb-lg-0">
+                <ul class="nav nav-pills me-auto mb-2 mb-lg-0">
+                      <li class="nav-item">
+                          @if(!User.Identity.IsAuthenticated)
+                            {
+                                <a class="nav-link active" asp-area="" asp-controller="Account" asp-action="Login" role="button">Вход в личный кабинет</a>
+                            }
+                      </li>
+                      <li class="nav-item">
+                          @if (User.Identity.IsAuthenticated)
+                            {
+                                @await Component.InvokeAsync("User")
+                                <a asp-controller="ShoppingCart" asp-action="Index">Корзина</a>
+                            }
+                            
+                      </li>
+                </ul>
             </div>
             <!-- Collapsible wrapper -->
           </div>

@@ -1,0 +1,20 @@
+﻿@model ShoppingCartViewModel
+<h4>Корзина</h4>
+
+@if (Model.ShoppingCart.CartItems.Count() > 0)
+{
+    @foreach (var item in Model.ShoppingCart.CartItems)
+    {
+        <span>@item.Product.Title</span>
+        <span>@item.Quantity</span>
+    }
+}
+else
+{
+    <p>корзина пуста</p>
+}
+
+
+
+
+

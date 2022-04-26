@@ -3,6 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Store.Models.Entities
 {
+    [Serializable]
     public class Product : EntityBase
     {
         [Display(Name = "Наименование товара")]

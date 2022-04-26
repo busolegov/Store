@@ -1,5 +1,6 @@
 ﻿namespace Store.Models.Entities
 {
+    [Serializable]
     public class CartItem
     {
         public Product Product { get; set; }

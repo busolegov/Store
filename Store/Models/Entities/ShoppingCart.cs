@@ -1,19 +1,20 @@
 ﻿using Store.DataService;
-
+using System.Web;
 
 namespace Store.Models.Entities
 {
+    [Serializable]
     public class ShoppingCart : IShoppingCartService
     {
-        private List<CartItem> Items = new List<CartItem>();
+        private List<CartItem> ItemsCollection = new List<CartItem>();
 
         public void AddItem(Product product, int quantity) 
         {
-            CartItem cartItem = Items.Where(x => x.Product.Id == product.Id).FirstOrDefault();
+            CartItem cartItem = ItemsCollection.Where(x => x.Product.Id == product.Id).FirstOrDefault();
 
             if (cartItem == null) 
             {
-                Items.Add(cartItem = new CartItem
+                ItemsCollection.Add(cartItem = new CartItem
                 {
                     Product = product,
                     Quantity = quantity
@@ -27,20 +28,20 @@ namespace Store.Models.Entities
 
         public void RemoveItem(Product product) 
         {
-            Items.RemoveAll(x => x.Product.Id == product.Id);
+            ItemsCollection.RemoveAll(x => x.Product.Id == product.Id);
         }
 
-        public decimal GetTotalPrice() => Items.Sum(x => x.Product.Price * x.Quantity);
+        public decimal GetTotalPrice() => ItemsCollection.Sum(x => x.Product.Price * x.Quantity);
 
 
         public void RemoveAll() 
         {
-            Items.Clear();
+            ItemsCollection.Clear();
         }
 
         public IEnumerable<CartItem> CartItems
         {
-            get { return Items; }
+            get { return ItemsCollection; }
         }
     }
 }

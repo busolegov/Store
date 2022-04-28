@@ -98,6 +98,7 @@ namespace Store.Controllers
         public async Task<IActionResult> LogoutAsync() 
         {
             await _signInManager.SignOutAsync();
+            HttpContext.Session.Clear();
             return RedirectToAction("Index", "Home");
         }
     }

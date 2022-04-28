@@ -1,7 +1,7 @@
 ﻿@model ShoppingCartViewModel
-<h4>Корзина</h4>
+<h4>Ваша корзина</h4>
 
-@if (Model.ShoppingCart.CartItems.Count() > 0)
+@*@if (Model.ShoppingCart.CartItems.Count() > 0)
 {
     @foreach (var item in Model.ShoppingCart.CartItems)
     {
@@ -12,7 +12,40 @@
 else
 {
     <p>корзина пуста</p>
-}
+}*@
+
+<table id="cartTable" class="table">
+<!-- ... -->
+<thead>
+        <tr>
+            <th>Кол-во</th>
+            <th>Игра</th>
+            <th class="text-right">Цена</th>
+            <th class="text-right">Общая цена</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.ShoppingCart.CartItems)
+        {
+            <tr>
+                <td class="text-center">@item.Quantity</td>
+                <td class="text-left">@item.Product.Title</td>
+                <td class="text-right">@item.Product.Price.ToString("# руб")</td>
+                <td class="text-right">
+                    @((item.Quantity * item.Product.Price).ToString("# руб"))
+                </td>
+                <td>
+                    @using (Html.BeginForm("RemoveFromCart", "Cart"))
+                    {
+                        @Html.Hidden("GameId", item.Product.Id)
+                        @Html.HiddenFor(x => x.ReturnUrl)
+                        <input class="btn btn-sm btn-warning" type="submit" value="Удалить" />
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+<!-- ... -->
 
 
 

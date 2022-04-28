@@ -43,5 +43,15 @@ namespace Store.Models.Entities
         {
             get { return ItemsCollection; }
         }
+
+        public int GetCount() 
+        {
+            int count = 0;
+            foreach (var item in ItemsCollection)
+            {
+                count += item.Quantity;
+            }
+            return count;
+        }
     }
 }

@@ -32,9 +32,14 @@
                                 <td>@product.Subtitle</td>
                                 <td>@product.Price</td>
                                 <td>
-@*                                    <input type="submit" class="btn-success" value="В корзину" asp-route-Id="@product.Id" asp-route-return></input>*@
+                                    @if (User.Identity.IsAuthenticated)
+                                    {
                                     <a class="btn btn-dark" asp-controller="ShoppingCart" asp-action="AddToCart" asp-route-Id="@product.Id">Добавить в корзину</a>
-                                    @*<button type="submit" >В корзину</button>*@
+                                    }
+                                    else
+                                    {
+                                    <a class="btn btn-dark" asp-controller="Account" asp-action="Login">Добавить в корзину</a>
+                                    }
                                 </td>
                             </tr>
                         }
@@ -43,5 +48,28 @@
             }
         </div>
     </div>
+
+<div class="row row-cols-1 row-cols-md-3 g-4">
+        @foreach (var product in Model)
+        {
+            <div class="col">
+                <div class="card">
+                    <img src="..." class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title">@product.Title</h5>
+                        <p class="card-text">@product.Subtitle</p>
+                        @if (User.Identity.IsAuthenticated)
+                                    {
+                                    <a class="btn btn-primary" asp-controller="ShoppingCart" asp-action="AddToCart" asp-route-Id="@product.Id">Добавить в корзину</a>
+                                    }
+                                    else
+                                    {
+                                    <a class="btn btn-primary" asp-controller="Account" asp-action="Login">Добавить в корзину</a>
+                                    }
+                    </div>
+                </div>
+            </div>
+        }
+</div>
 @*</form>*@
 

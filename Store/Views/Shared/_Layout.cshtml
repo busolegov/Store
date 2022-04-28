@@ -28,6 +28,8 @@
             </div>
             <div class="navbar-nav me-auto mb-2 mb-lg-0">
                 <ul class="nav nav-pills me-auto mb-2 mb-lg-0">
+                      <li>
+                          @await Component.InvokeAsync("ShoppingCart")</li>
                       <li class="nav-item">
                           @if(!User.Identity.IsAuthenticated)
                             {
@@ -38,7 +40,6 @@
                           @if (User.Identity.IsAuthenticated)
                             {
                                 @await Component.InvokeAsync("User")
-                                <a asp-controller="ShoppingCart" asp-action="Index">Корзина</a>
                             }
                             
                       </li>

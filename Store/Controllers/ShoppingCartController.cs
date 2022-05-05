@@ -16,6 +16,7 @@ namespace Store.Controllers
 
         public IActionResult Index(string returnUrl)
         {
+            var s = ViewData["returnUrl"];
             return View(new ShoppingCartViewModel
             {
                 ShoppingCart = HttpContext.Session.GetObj<ShoppingCart>("cart"),
@@ -62,9 +63,20 @@ namespace Store.Controllers
 
             if (product != null)
             {
-                GetCart().RemoveItem(product);
+                //GetCart().RemoveItem(product);
+                ShoppingCart cart = HttpContext.Session.GetObj<ShoppingCart>("cart");
+                cart.RemoveItem(product);
+                HttpContext.Session.SetObj("cart", cart);
             }
-            return View();
+            return RedirectToAction("Index", "ShoppingCart");
+        }
+
+        public ActionResult ClearCart() 
+        {
+            ShoppingCart cart = HttpContext.Session.GetObj<ShoppingCart>("cart");
+            cart.RemoveAll();
+            HttpContext.Session.Clear();
+            return RedirectToAction("Index", "Catalog");
         }
 
     }

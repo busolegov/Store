@@ -31,7 +31,7 @@ namespace Store.Controllers
                 return View();
             }
 
-            var user = new IdentityUser { UserName = model.Login, Email = model.Email };
+            var user = new IdentityUser { UserName = model.Login, Email = model.Email};
 
             var result = await _userManager.CreateAsync(user, model.Password);
 

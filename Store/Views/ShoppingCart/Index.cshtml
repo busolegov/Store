@@ -15,8 +15,7 @@ else
 }*@
 
 <table id="cartTable" class="table">
-<!-- ... -->
-<thead>
+    <thead>
         <tr>
             <th>Кол-во</th>
             <th>Игра</th>
@@ -32,20 +31,40 @@ else
                 <td class="text-left">@item.Product.Title</td>
                 <td class="text-right">@item.Product.Price.ToString("# руб")</td>
                 <td class="text-right">
-                    @((item.Quantity * item.Product.Price).ToString("# руб"))
-                </td>
+                    @((item.Quantity * item.Product.Price).ToString("# руб"))</td>
                 <td>
-                    @using (Html.BeginForm("RemoveFromCart", "Cart"))
+                    @using (Html.BeginForm("RemoveFromCart", "ShoppingCart"))
                     {
-                        @Html.Hidden("GameId", item.Product.Id)
+                        @Html.Hidden("id", item.Product.Id)
                         @Html.HiddenFor(x => x.ReturnUrl)
-                        <input class="btn btn-sm btn-warning" type="submit" value="Удалить" />
+                        <button asp-controller="ShoppingCart" asp-action="RemoveFromCart" class="btn btn-sm btn-warning" type="submit">Удалить</button>
                     }
                 </td>
             </tr>
         }
     </tbody>
-<!-- ... -->
+    <tfoot>
+        <tr>
+            <td colspan="3" class="align-content-end">Общая сумма:</td>
+            <td class="align-content-end">
+                @Model.ShoppingCart.GetTotalPrice().ToString("# руб")
+            </td>
+        </tr>
+    </tfoot>
+</table>
+
+<div class="align-content-center my-1">
+    @using(Html.BeginForm("ClearCart", "ShoppingCart"))
+    {
+        <button asp-controller="ShoppingCart" asp-action="ClearCart" class="btn btn-warning" type="submit">Очистить корзину</button>
+    }
+    
+</div>
+<div class="align-content-center my-1">
+    <a class="btn btn-primary" asp-controller="Catalog" asp-action="Index">Продолжить покупки</a>
+</div>
+
+
 
 
 

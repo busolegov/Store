@@ -1,9 +1,10 @@
 ﻿@model IdentityUser
 
-<h1>Личный кабинет</h1>
+<h4>Личный кабинет</h4>
+
 <div class="container">
     <form>
-        <label>Имя</label>
+        <label>Логин</label>
         <p>@Model.UserName</p>
         <label>Email</label>
         <p>@Model.Email</p>
@@ -16,5 +17,5 @@
 {
     <a asp-controller="Admin" asp-action="Index">AdminPage</a>
 }
-
+<br>
 <a asp-controller="Account" asp-action="Logout">Log Out</a>

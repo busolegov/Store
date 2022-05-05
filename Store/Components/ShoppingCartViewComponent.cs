@@ -15,7 +15,6 @@ namespace Store.Components
                 cart = HttpContext.Session.GetObj<ShoppingCart>("cart");
 
             }
-
             return View("ShoppingCart", cart);
         }
     }

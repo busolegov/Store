@@ -28,7 +28,15 @@ namespace Store.Models.Entities
 
         public void RemoveItem(Product product) 
         {
-            ItemsCollection.RemoveAll(x => x.Product.Id == product.Id);
+            CartItem cartItem = ItemsCollection.Where(x => x.Product.Id == product.Id).FirstOrDefault();
+            if (cartItem != null) 
+            {
+                cartItem.Quantity--;
+                if (cartItem.Quantity==0)
+                {
+                    ItemsCollection.Remove(cartItem);
+                }
+            }
         }
 
         public decimal GetTotalPrice() => ItemsCollection.Sum(x => x.Product.Price * x.Quantity);

@@ -2,7 +2,6 @@
 
 namespace Store.Models.Entities
 {
-    [Serializable]
     public abstract class EntityBase
     {
         protected EntityBase()

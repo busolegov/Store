@@ -3,7 +3,6 @@ using System.Web;
 
 namespace Store.Models.Entities
 {
-    [Serializable]
     public class ShoppingCart : IShoppingCartService
     {
         private List<CartItem> ItemsCollection = new List<CartItem>();

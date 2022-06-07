@@ -6,7 +6,7 @@ using Store.Models.Entities;
 
 namespace Store.Controllers
 {
-    //[Authorize(Policy = "Admin")]
+    [Authorize(Policy = "Admin")]
     public class AdminController : Controller
     {
         private UserManager<IdentityUser> _userManager;
@@ -23,20 +23,10 @@ namespace Store.Controllers
             return View();
         }
 
-
-        //public IActionResult EditUsers()
-        //{
-        //    return View(_userManager.Users);
-        //}
+        //users edit
 
 
-        //[HttpPost]
-        //public IActionResult EditUser(IdentityUser user) 
-        //{
-        //    return RedirectToAction("Index");
-        //}
-
-
+        //products edit
         public IActionResult EditProducts()
         {
             var productService = new ProductRepositoryService(_context);

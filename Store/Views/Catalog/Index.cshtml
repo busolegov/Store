@@ -1,9 +1,9 @@
-﻿@model IQueryable<Store.Models.Entities.Product>
+﻿@model IndexViewModel
 
  <h2>Каталог товаров</h2>
-
-<div class="row row-cols-1 row-cols-md-3 g-4">
-    @foreach (var product in Model)
+ 
+<div class="row row-cols-1 row-cols-md-3 g-4 my-5">
+    @foreach (var product in Model.Products)
         {
             <div class="col">
                 <div class="card">
@@ -25,3 +25,25 @@
             </div>
         }       
 </div>
+
+@if (Model.PageViewModel.HasPreviousPage)
+{
+    <a asp-action="Index"
+       asp-route-page="@(Model.PageViewModel.PageNumber - 1)"
+       class="btn btn-outline-dark">
+        <i class="glyphicon glyphicon-chevron-left"></i>
+        Назад
+    </a>
+}
+
+@if (Model.PageViewModel.HasNextPage)
+{
+    <a asp-action="Index"
+       asp-route-page="@(Model.PageViewModel.PageNumber + 1)"
+       class="btn btn-outline-dark">
+        Вперед
+        <i class="glyphicon glyphicon-chevron-right"></i>
+    </a>
+}
+
+

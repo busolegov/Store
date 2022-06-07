@@ -14,14 +14,18 @@ namespace Store.Controllers
             _dataManager = dataManager;
         }
 
-        public IActionResult Index(string returnUrl)
+        public ViewResult Index()
         {
-            var s = ViewData["returnUrl"];
             return View(new ShoppingCartViewModel
             {
                 ShoppingCart = HttpContext.Session.GetObj<ShoppingCart>("cart"),
-                ReturnUrl = returnUrl
             });
+        }
+
+        [HttpPost]
+        public IActionResult Index(ShoppingCartViewModel model)
+        {
+            return View(model.ReturnUrl);
         }
 
         public ShoppingCart GetCart()
@@ -52,7 +56,6 @@ namespace Store.Controllers
                     cart.AddItem(product, 1);
                 }
                 HttpContext.Session.SetObj("cart", cart);
-
             }
             return RedirectToAction("Index", "Catalog");
         }
@@ -63,7 +66,6 @@ namespace Store.Controllers
 
             if (product != null)
             {
-                //GetCart().RemoveItem(product);
                 ShoppingCart cart = HttpContext.Session.GetObj<ShoppingCart>("cart");
                 cart.RemoveItem(product);
                 HttpContext.Session.SetObj("cart", cart);
@@ -78,6 +80,5 @@ namespace Store.Controllers
             HttpContext.Session.Clear();
             return RedirectToAction("Index", "Catalog");
         }
-
     }
 }

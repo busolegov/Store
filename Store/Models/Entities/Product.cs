@@ -3,7 +3,6 @@ using System.ComponentModel.DataAnnotations;
 
 namespace Store.Models.Entities
 {
-    [Serializable]
     public class Product : EntityBase
     {
         [Required(ErrorMessage ="Необходимо ввести название товара!")]

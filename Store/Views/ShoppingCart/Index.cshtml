@@ -1,18 +1,6 @@
 ﻿@model ShoppingCartViewModel
 <h4>Ваша корзина</h4>
 
-@*@if (Model.ShoppingCart.CartItems.Count() > 0)
-{
-    @foreach (var item in Model.ShoppingCart.CartItems)
-    {
-        <span>@item.Product.Title</span>
-        <span>@item.Quantity</span>
-    }
-}
-else
-{
-    <p>корзина пуста</p>
-}*@
 
 <table id="cartTable" class="table">
     <thead>
@@ -58,15 +46,12 @@ else
     {
         <button asp-controller="ShoppingCart" asp-action="ClearCart" class="btn btn-warning" type="submit">Очистить корзину</button>
     }
-    
 </div>
-<div class="align-content-center my-1">
+
+<div class="align-content-center my-2">
     <a class="btn btn-primary" asp-controller="Catalog" asp-action="Index">Продолжить покупки</a>
 </div>
 
-
-
-
-
-
-
+<div class="align-content-center my-2">
+    <a class="btn btn-primary" asp-controller="Catalog" asp-action="Index">Оформить заказ</a>
+</div>

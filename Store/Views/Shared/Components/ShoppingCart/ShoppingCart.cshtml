@@ -1,6 +1,6 @@
 ﻿@model ShoppingCart
 
-@*<input asp-for="ReturnUrl" hidden></input>*@
+
 @if (Model.CartItems.Count()>0)
 {
     <button type="button" class="btn btn-primary" onclick="location.href='@Url.Action("Index", "ShoppingCart")'">

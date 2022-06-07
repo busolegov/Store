@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.IdentityModel.Tokens;
 using Store.DataService;
+using Store.Models.ViewModels;
 
 namespace Store.Controllers
 {
@@ -13,18 +13,20 @@ namespace Store.Controllers
             _dataManager = dataManager;
         }
 
-        public IActionResult Index()
+        public IActionResult Index(int page = 1)
         {
-            return View(_dataManager.ProductService.GetProducts());
+            int pageSize = 6;
+
+            var products = _dataManager.ProductService.GetProducts();
+            var count = products.Count();
+            var items = products.Skip((page - 1) * pageSize).Take(pageSize).ToList();
+            PageViewModel pageViewModel = new PageViewModel(count, page, pageSize);
+            IndexViewModel indexViewModel = new IndexViewModel
+            {
+                PageViewModel = pageViewModel,
+                Products = items,
+            };
+            return View(indexViewModel);
         }
-
-
-        //[HttpPost]
-        //public async Task<IActionResult> IndexAsync(Guid id)
-        //{
-        //    var product = await _dataManager.ProductService.GetProductByIdAsync(id);
-        //    _dataManager.ShoppingCartService.AddItem(product, 1);
-        //    return View();
-        //}
     }
 }
